@@ -109,8 +109,6 @@ const TREES = [
   { x: 480, y: 350, variant: 2 },
   { x: 520, y: 370, variant: 1 },
   { x: 500, y: 390, variant: 3 },
-  { x: 140, y: 130, variant: 3 },
-  { x: 190, y: 120, variant: 2 },
   { x: 480, y: 170, variant: 1 },
   { x: 540, y: 160, variant: 3 },
 ];
