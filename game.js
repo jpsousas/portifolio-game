@@ -209,6 +209,7 @@ const ELEMENTS = [
       <ul>
         <li>CRUD completo com React no frontend e Django no backend.</li>
         <li>Persistência em banco relacional MySQL.</li>
+        <li>Aplicação e compreensão de: <b>Triggers, Functions, Procedures, Cursores, Queries, e Junções.</b></li>
       </ul>
     `,
   },
