@@ -1,7 +1,3 @@
-// ==========================================================================
-// João Pedro Sousa — Portfólio interativo (gato + vila pixel art)
-// ==========================================================================
-
 const TILE = 32;
 const MAP_COLS = 22;
 const MAP_ROWS = 16;
@@ -113,6 +109,8 @@ const TREES = [
   { x: 480, y: 350, variant: 2 },
   { x: 520, y: 370, variant: 1 },
   { x: 500, y: 390, variant: 3 },
+  { x: 140, y: 130, variant: 3 },
+  { x: 190, y: 120, variant: 2 },
   { x: 480, y: 170, variant: 1 },
   { x: 540, y: 160, variant: 3 },
 ];
@@ -249,7 +247,6 @@ const modalClose = document.getElementById("modal-close");
 const promptBubble = document.getElementById("prompt-bubble");
 
 let modalOpen = false;
-let modalIconInterval;
 
 function initializePersonalSlider(root) {
   const viewport = root.querySelector("[data-personal-viewport]");
@@ -289,23 +286,7 @@ function initializePersonalSlider(root) {
 }
 
 function openModal(el) {
-  if (modalIconInterval) {
-    clearInterval(modalIconInterval);
-    modalIconInterval = null;
-  }
-  modalIcon.className = "";
-  modalIcon.style.backgroundImage = "";
-
-  const isComputer = el.key.startsWith("computador");
-
-  if (isComputer) {
-    const computerVariant = el.icon.replace("computador", "");
-    modalIcon.src = "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7"; // transparent 1x1 gif
-    modalIcon.classList.add("animated-icon", `icon-computador${computerVariant}`);
-  } else {
-    modalIcon.src = `assets/${el.icon}.png`;
-  }
-  
+  modalIcon.src = `assets/${el.icon}.png`;
   modalEyebrow.textContent = el.eyebrow;
   modalTitle.textContent = el.title;
   modalPeriod.textContent = el.period;
@@ -327,14 +308,6 @@ function closeModal() {
   modalOverlay.classList.remove("open");
   modalOverlay.classList.remove("house-open");
   modalOpen = false;
-
-  if (modalIconInterval) {
-    clearInterval(modalIconInterval);
-    modalIconInterval = null;
-  }
-  modalIcon.className = "";
-  modalIcon.src = "";
-  modalIcon.style.backgroundImage = "";
 }
 modalClose.addEventListener("click", closeModal);
 modalOverlay.addEventListener("click", (e) => {
@@ -598,6 +571,12 @@ class VillageScene extends Phaser.Scene {
 
       if (this.cursors.up.isDown || this.wasd.up.isDown) vy = -1;
       else if (this.cursors.down.isDown || this.wasd.down.isDown) vy = 1;
+
+      // Fallback: joystick virtual (mobile), só usado quando o teclado está parado
+      if (vx === 0 && vy === 0 && window.mobileInput) {
+        vx = window.mobileInput.x;
+        vy = window.mobileInput.y;
+      }
     }
 
     const moving = vx !== 0 || vy !== 0;

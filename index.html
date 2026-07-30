@@ -33,7 +33,6 @@
     background:var(--sky-bottom);
     font-family:'Inter',system-ui,sans-serif;
     color:var(--ink);
-    cursor: url('assets/cursor_idle.png') 16 16, auto;
   }
   #sky-layer{
     position:fixed; inset:0;
@@ -50,6 +49,71 @@
     image-rendering:pixelated;
     will-change:transform;
   }
+
+  /* ---------- Bloqueio de orientação (retrato apenas) ---------- */
+  #orientation-lock{
+    display:none;
+    position:fixed; inset:0;
+    z-index:9999;
+    background:var(--sky-bottom);
+    color:var(--ink);
+    flex-direction:column;
+    align-items:center;
+    justify-content:center;
+    text-align:center;
+    padding:24px;
+  }
+  #orientation-lock__icon{
+    font-size:52px;
+    margin-bottom:18px;
+    animation:rotate-hint 1.6s ease-in-out infinite;
+  }
+  @keyframes rotate-hint{
+    0%,100%{ transform:rotate(0deg); }
+    50%{ transform:rotate(90deg); }
+  }
+  #orientation-lock p{
+    font-family:'Inter',system-ui,sans-serif;
+    font-size:14px;
+    line-height:1.7;
+    max-width:280px;
+  }
+  #orientation-lock b{
+    font-family:'Press Start 2P', monospace;
+    font-size:11px;
+    display:inline-block;
+    margin:0 2px;
+  }
+  @media (orientation: landscape) and (hover: none) and (pointer: coarse){
+    #orientation-lock{ display:flex; }
+  }
+
+  /* ---------- Joystick virtual (mobile/touch) ---------- */
+  #mobile-joystick{
+    display:none;
+    position:fixed;
+    left:22px; bottom:22px;
+    width:104px; height:104px;
+    border-radius:50%;
+    background:rgba(43,47,56,.35);
+    border:2px solid rgba(255,255,255,.65);
+    z-index:50;
+    touch-action:none;
+  }
+  #mobile-joystick__knob{
+    position:absolute;
+    left:50%; top:50%;
+    width:44px; height:44px;
+    margin-left:-22px; margin-top:-22px;
+    border-radius:50%;
+    background:rgba(244,236,216,.92);
+    border:2px solid var(--ink);
+    box-shadow:0 2px 0 rgba(0,0,0,.25);
+  }
+  @media (hover: none) and (pointer: coarse){
+    #mobile-joystick{ display:block; }
+  }
+
   #game-wrap{
     position:relative; z-index:1;
     display:flex; align-items:center; justify-content:center;
@@ -307,19 +371,6 @@
     margin-right:14px;
     margin-bottom:8px;
   }
-  @keyframes sprite-anim {
-    from { background-position: 0 0; }
-    to { background-position: -128px 0; }
-  }
-  .animated-icon {
-    width: 32px;
-    height: 32px;
-    background-repeat: no-repeat;
-    animation: sprite-anim 1s steps(4) infinite;
-  }
-  .icon-computador1 { background-image: url('assets/computador1.png'); }
-  .icon-computador2 { background-image: url('assets/computador2.png'); }
-  .icon-computador3 { background-image: url('assets/computador3.png'); }
   #modal-eyebrow{
     font-family:'Press Start 2P', monospace;
     font-size:9px;
@@ -634,6 +685,71 @@
         );
         anim.currentTime = Math.random() * duration * 1000;
       }
+    })();
+  </script>
+
+  <div id="orientation-lock">
+    <div id="orientation-lock__icon">📱</div>
+    <p>Gire seu aparelho para o modo <b>RETRATO</b><br>pra jogar 🐾</p>
+  </div>
+
+  <div id="mobile-joystick">
+    <div id="mobile-joystick__knob"></div>
+  </div>
+
+  <script>
+    (function(){
+      var base = document.getElementById('mobile-joystick');
+      var knob = document.getElementById('mobile-joystick__knob');
+      var radius = 38;
+      var deadzone = 10;
+      var activeId = null;
+      window.mobileInput = { x: 0, y: 0 };
+
+      function setKnob(dx, dy){
+        knob.style.transform = 'translate(' + dx + 'px, ' + dy + 'px)';
+      }
+      function reset(){
+        window.mobileInput.x = 0;
+        window.mobileInput.y = 0;
+        setKnob(0, 0);
+      }
+      function handleMove(clientX, clientY){
+        var rect = base.getBoundingClientRect();
+        var cx = rect.left + rect.width / 2;
+        var cy = rect.top + rect.height / 2;
+        var dx = clientX - cx;
+        var dy = clientY - cy;
+        var dist = Math.hypot(dx, dy);
+        if (dist > radius){
+          dx = (dx / dist) * radius;
+          dy = (dy / dist) * radius;
+        }
+        setKnob(dx, dy);
+        window.mobileInput.x = Math.abs(dx) > deadzone ? Math.sign(dx) : 0;
+        window.mobileInput.y = Math.abs(dy) > deadzone ? Math.sign(dy) : 0;
+      }
+
+      base.addEventListener('pointerdown', function(e){
+        activeId = e.pointerId;
+        base.setPointerCapture(activeId);
+        handleMove(e.clientX, e.clientY);
+      });
+      base.addEventListener('pointermove', function(e){
+        if (activeId !== e.pointerId) return;
+        handleMove(e.clientX, e.clientY);
+      });
+      function endTouch(e){
+        if (activeId !== e.pointerId) return;
+        activeId = null;
+        reset();
+      }
+      base.addEventListener('pointerup', endTouch);
+      base.addEventListener('pointercancel', endTouch);
+      base.addEventListener('pointerleave', function(e){
+        if (activeId !== e.pointerId) return;
+        endTouch(e);
+      });
     })();
   </script>
 
