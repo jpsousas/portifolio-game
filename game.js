@@ -143,14 +143,13 @@ const ELEMENTS = [
     body: `
       <div class="exp">
         <div class="exp-header">
-          <span class="role pill">Bolsista de Redes de Computadores</span>
-          <span class="company">CPD - UFSM</span>
-          <span class="period pill">ago/2023 – dez/2024</span>
+          <span class="role pill">Desenvolvedor FullStack</span>
+          <span class="company">Forte Security</span>
+          <span class="period pill">out/2025 – jun/2026</span>
         </div>
         <ul>
-          <li>Criação de scripts em Python para configuração de dispositivos de rede, utilizando as libraries <b>Paramiko</b> e <b>Netmiko</b>.</li>
-          <li>Desenvolvimento web com <b>Django</b>,  e uso de <b>Pandas</b>/<b>NumPy</b> para manipular e visualizar dados de status de dispositivos.</li>
-          <li>Busca e identificação de switches não gerenciáveis na rede da UFSM.</li>
+          <li>Desenvolveu e refatorou funcionalidades-chave do CRM interno, atuando fullstack com <b>React</b> no frontend, <b>TypeScript</b> no backend e persistência em <b>MySQL</b>.</li>
+          <li>Atuou em todas as fases do ciclo de desenvolvimento, usando <b>SCRUM</b> e <b>Kanban</b> para entregas contínuas alinhadas aos objetivos do negócio.</li>
         </ul>
       </div>
       <div class="exp">
@@ -167,13 +166,14 @@ const ELEMENTS = [
       </div>
       <div class="exp">
         <div class="exp-header">
-          <span class="role pill">Desenvolvedor FullStack</span>
-          <span class="company">Forte Security</span>
-          <span class="period pill">out/2025 – jun/2026</span>
+          <span class="role pill">Bolsista de Redes de Computadores</span>
+          <span class="company">CPD - UFSM</span>
+          <span class="period pill">ago/2023 – dez/2024</span>
         </div>
         <ul>
-          <li>Desenvolveu e refatorou funcionalidades-chave do CRM interno, atuando fullstack com <b>React</b> no frontend, <b>TypeScript</b> no backend e persistência em <b>MySQL</b>.</li>
-          <li>Atuou em todas as fases do ciclo de desenvolvimento, usando <b>SCRUM</b> e <b>Kanban</b> para entregas contínuas alinhadas aos objetivos do negócio.</li>
+          <li>Criação de scripts em Python para configuração de dispositivos de rede, utilizando as libraries <b>Paramiko</b> e <b>Netmiko</b>.</li>
+          <li>Desenvolvimento web com <b>Django</b>,  e uso de <b>Pandas</b>/<b>NumPy</b> para manipular e visualizar dados de status de dispositivos.</li>
+          <li>Busca e identificação de switches não gerenciáveis na rede da UFSM.</li>
         </ul>
       </div>
     `,
