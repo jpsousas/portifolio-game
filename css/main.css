@@ -1,0 +1,17 @@
+/*
+ * Ponto de entrada do CSS.
+ *
+ * A ORDEM IMPORTA: responsive.css usa os mesmos seletores dos outros arquivos,
+ * com a mesma especificidade, e por isso precisa ser sempre o último.
+ */
+@import url("base.css");
+@import url("sky.css");
+@import url("orientation-lock.css");
+@import url("joystick.css");
+@import url("layout.css");
+@import url("hud.css");
+@import url("prompt-bubble.css");
+@import url("modal.css");
+@import url("personal-gallery.css");
+@import url("sound-toggle.css");
+@import url("responsive.css");

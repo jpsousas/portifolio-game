@@ -1,0 +1,16 @@
+/* Floating sound toggle button (fixed bottom-right) */
+.sound-btn{
+  position:fixed;
+  right:14px;
+  bottom:14px;
+  z-index:7;
+  background:var(--parchment);
+  border:2px solid var(--ink);
+  border-radius:10px;
+  padding:10px 12px;
+  cursor:pointer;
+  font-family:'Press Start 2P', monospace;
+  font-size:14px;
+  pointer-events:auto;
+  box-shadow:0 6px 0 rgba(0,0,0,.15);
+}

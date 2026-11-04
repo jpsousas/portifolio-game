@@ -1,0 +1,15 @@
+#sky-layer{
+  position:fixed; inset:0;
+  z-index:0;
+  overflow:hidden;
+  pointer-events:none;
+  background:linear-gradient(180deg,var(--sky-top),var(--sky-bottom));
+}
+.sky-cloud{
+  position:absolute;
+  left:0; top:0;
+  background-repeat:no-repeat;
+  background-size:contain;
+  image-rendering:pixelated;
+  will-change:transform;
+}

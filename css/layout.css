@@ -1,0 +1,18 @@
+#game-wrap{
+  position:relative; z-index:1;
+  display:flex; align-items:center; justify-content:center;
+  width:100%; height:100%;
+}
+#game-container{
+  /* wider container for tablet/desktop while keeping mobile responsive */
+  width:min(100vw - 24px, 820px);
+  height:min(calc((100vw - 24px) * 0.75), 615px);
+  max-height:min(86vh, 615px);
+  aspect-ratio:4 / 3;
+  border:4px solid var(--ink);
+  border-radius:6px;
+  box-shadow:0 10px 30px rgba(0,0,0,.25);
+  image-rendering:pixelated;
+  overflow:hidden;
+}
+#game-container canvas{ display:block; width:100%; height:100%; }

@@ -1,0 +1,37 @@
+/* ---------- Bloqueio de orientação (retrato apenas) ---------- */
+#orientation-lock{
+  display:none;
+  position:fixed; inset:0;
+  z-index:9999;
+  background:var(--sky-bottom);
+  color:var(--ink);
+  flex-direction:column;
+  align-items:center;
+  justify-content:center;
+  text-align:center;
+  padding:24px;
+}
+#orientation-lock__icon{
+  font-size:52px;
+  margin-bottom:18px;
+  animation:rotate-hint 1.6s ease-in-out infinite;
+}
+@keyframes rotate-hint{
+  0%,100%{ transform:rotate(0deg); }
+  50%{ transform:rotate(90deg); }
+}
+#orientation-lock p{
+  font-family:'Inter',system-ui,sans-serif;
+  font-size:14px;
+  line-height:1.7;
+  max-width:280px;
+}
+#orientation-lock b{
+  font-family:'Press Start 2P', monospace;
+  font-size:11px;
+  display:inline-block;
+  margin:0 2px;
+}
+@media (orientation: landscape) and (hover: none) and (pointer: coarse){
+  #orientation-lock{ display:flex; }
+}

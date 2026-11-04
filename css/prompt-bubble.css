@@ -1,0 +1,21 @@
+/* Interaction prompt bubble (world-anchored, positioned by JS) */
+#prompt-bubble{
+  position:fixed;
+  transform:translate(-50%,-100%);
+  background:var(--ink);
+  color:#fff;
+  padding:5px 10px;
+  border-radius:6px;
+  font-family:'Press Start 2P', monospace;
+  font-size:10px;
+  white-space:nowrap;
+  pointer-events:none;
+  display:none;
+  z-index:6;
+  box-shadow:0 3px 0 rgba(0,0,0,.2);
+}
+#prompt-bubble:after{
+  content:'';
+  position:absolute; left:50%; bottom:-6px; transform:translateX(-50%);
+  border:6px solid transparent; border-top-color:var(--ink);
+}

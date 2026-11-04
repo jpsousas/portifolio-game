@@ -1,0 +1,139 @@
+/* Modal */
+#modal-overlay{
+  position:fixed; inset:0;
+  background:rgba(20,22,28,.55);
+  display:none;
+  align-items:center; justify-content:center;
+  z-index:10;
+}
+#modal-overlay.open{ display:flex; }
+#modal-card{
+  width:min(520px, 88vw);
+  max-height:80vh;
+  overflow-y:auto;
+  background:var(--parchment);
+  border:3px solid var(--ink);
+  border-radius:10px;
+  padding:22px 24px 20px;
+  position:relative;
+  box-shadow:0 12px 0 rgba(0,0,0,.2);
+  animation:pop-in .18s ease-out;
+}
+#modal-overlay.house-open #modal-card{
+  width:min(760px, 92vw);
+}
+@keyframes pop-in{
+  from{ transform:scale(.92); opacity:0; }
+  to{ transform:scale(1); opacity:1; }
+}
+#modal-icon{
+  --icon-frames:1;
+  width:40px; height:40px;
+  background-repeat:no-repeat;
+  background-size:calc(var(--icon-frames) * 100%) 100%;
+  image-rendering:pixelated;
+  float:left;
+  margin-right:14px;
+  margin-bottom:8px;
+}
+/* Tira de frames: mostra um frame por vez, a 4 quadros por segundo como no jogo. */
+#modal-icon.is-animated{
+  animation:modal-icon-frames calc(var(--icon-frames) * 250ms) steps(var(--icon-frames)) infinite;
+}
+@keyframes modal-icon-frames{
+  from{ background-position-x:0; }
+  to{ background-position-x:calc(var(--icon-frames) * -40px); }
+}
+@media (prefers-reduced-motion: reduce){
+  #modal-icon.is-animated{ animation:none; }
+}
+#modal-eyebrow{
+  font-family:'Press Start 2P', monospace;
+  font-size:9px;
+  color:var(--accent-dark);
+  letter-spacing:.5px;
+  margin:0 0 6px;
+}
+#modal-title{
+  font-family:'Press Start 2P', monospace;
+  font-size:14px;
+  color:var(--slate-dark);
+  margin:0 0 12px;
+  line-height:1.5;
+}
+#modal-period{
+  display:inline-block;
+  font-size:11px;
+  font-weight:700;
+  color:#fff;
+  background:var(--leaf);
+  padding:3px 8px;
+  border-radius:4px;
+  margin-bottom:10px;
+}
+/* Reusable pill style for role names and date ranges inside modal */
+.pill{
+  display:inline-block;
+  font-size:11px;
+  font-weight:700;
+  color:#fff;
+  background:var(--leaf);
+  padding:3px 8px;
+  border-radius:4px;
+  margin-bottom:6px;
+}
+/* Experience layout inside modal */
+.exp{
+  margin:10px 0 18px 0;
+}
+.exp-header{
+  display:flex;
+  flex-wrap:nowrap; /* força uma única linha sem quebras */
+  gap:8px 12px;
+  align-items:center;
+  margin-bottom:8px;
+  white-space:nowrap;
+  overflow-x:auto; /* permite deslizar horizontalmente se não couber */
+  -webkit-overflow-scrolling:touch;
+}
+.exp-header > *{ flex: none; }
+.role.pill{
+  background:var(--accent);
+  color:#fff;
+  font-size:13px;
+  padding:6px 10px;
+  border-radius:6px;
+}
+.company{
+  font-weight:700;
+  color:var(--slate-dark);
+  font-size:13px;
+  letter-spacing:0.2px;
+  white-space:nowrap;
+}
+.period.pill{
+  background:var(--leaf);
+  color:#fff;
+  font-size:12px;
+  padding:4px 8px;
+  border-radius:5px;
+  white-space:nowrap;
+}
+/* Slightly larger body text for readability */
+#modal-body{ font-size:15px; }
+#modal-body p{ margin:0 0 10px; }
+#modal-body ul{ margin:6px 0 12px 18px; padding:0; }
+#modal-body li{ margin-bottom:6px; }
+#modal-body a{ color:var(--slate-dark); font-weight:700; }
+#modal-close{
+  position:absolute; top:12px; right:12px;
+  width:28px; height:28px;
+  border:2px solid var(--ink);
+  background:#fff;
+  border-radius:6px;
+  font-family:'Press Start 2P', monospace;
+  font-size:12px;
+  cursor:pointer;
+  line-height:1;
+}
+#modal-close:hover{ background:var(--accent); }
